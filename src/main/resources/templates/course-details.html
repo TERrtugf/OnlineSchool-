@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${course.title}">Курс</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header class="header">
+    <a class="logo" th:href="@{/}">OnlineSchool</a>
+
+    <nav>
+        <a th:href="@{/courses}">Все курсы</a>
+    </nav>
+</header>
+
+<main class="hero">
+    <div class="hero-content">
+        <h1 th:text="${course.title}">Название курса</h1>
+
+        <p class="description"
+           th:text="${course.description}">
+            Описание курса
+        </p>
+
+        <h2>Уроки курса</h2>
+
+        <p th:if="${#lists.isEmpty(course.lessons)}">
+            В этом курсе пока нет уроков.
+        </p>
+
+        <ul th:unless="${#lists.isEmpty(course.lessons)}">
+            <li th:each="lesson : ${course.lessons}">
+                <a th:href="@{/lessons/{id}(id=${lesson.id})}"
+                   th:text="${lesson.position + '. ' + lesson.title}">
+                    Название урока
+                </a>
+            </li>
+        </ul>
+    </div>
+</main>
+
+</body>
+</html>
