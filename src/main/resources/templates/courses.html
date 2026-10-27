@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог курсов — OnlineSchool</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header class="header">
+    <a class="logo" th:href="@{/}">OnlineSchool</a>
+
+    <nav>
+        <a th:href="@{/}">Главная</a>
+        <a th:href="@{/courses}">Курсы</a>
+    </nav>
+</header>
+
+<main class="hero">
+    <div class="hero-content">
+        <h1>Каталог курсов</h1>
+
+        <p class="description"
+           th:if="${#lists.isEmpty(courses)}">
+            Пока курсов нет. Скоро здесь появятся учебные материалы!
+        </p>
+
+        <div th:unless="${#lists.isEmpty(courses)}">
+            <article th:each="course : ${courses}">
+                <h2 th:text="${course.title}">Название курса</h2>
+
+                <p th:text="${course.description}">
+                    Описание курса
+                </p>
+
+                <a class="button"
+                   th:href="@{/courses/{id}(id=${course.id})}">
+                    Открыть курс
+                </a>
+            </article>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>
