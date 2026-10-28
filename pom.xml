@@ -13,8 +13,8 @@
         <relativePath/>
     </parent>
 
-    <groupId>com.youredu</groupId>
-    <artifactId>OnlineSchool</artifactId>
+    <groupId>org.example</groupId>
+    <artifactId>OnlineSchool_1</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
     <name>OnlineSchool</name>
@@ -26,45 +26,38 @@
 
     <dependencies>
 
-        <!-- Создание веб-приложения -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- HTML-шаблоны -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
 
-        <!-- Работа с сущностями и базой данных -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
 
-        <!-- Драйвер MySQL -->
         <dependency>
-            <groupId>com.mysql</groupId>
-            <artifactId>mysql-connector-j</artifactId>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
             <scope>runtime</scope>
         </dependency>
 
-        <!-- Проверка входных данных -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
 
-        <!-- Генерация геттеров, сеттеров и конструкторов -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
 
-        <!-- Тестирование -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -75,13 +68,10 @@
 
     <build>
         <plugins>
-
-            <!-- Сборка и запуск Spring Boot -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-
         </plugins>
     </build>
 

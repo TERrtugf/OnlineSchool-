@@ -1,18 +1,14 @@
+
 package org.example.controller;
 
 import org.example.domain.course.Course;
 import org.example.service.courseService.CourseService;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
-@RequestMapping("/courses")
+@RestController
+@RequestMapping("/api/courses")
 public class CourseController {
 
     private final CourseService courseService;
@@ -21,26 +17,50 @@ public class CourseController {
         this.courseService = courseService;
     }
 
-    // Страница со всеми курсами
     @GetMapping
-    public String getAllCourses(Model model) {
-        List<Course> courses = courseService.getAllCourses();
-
-        model.addAttribute("courses", courses);
-
-        return "courses";
+    public List<CourseResponse> getAllCourses() {
+        return courseService.getAllCourses()
+                .stream()
+                .map(CourseResponse::from)
+                .toList();
     }
 
-    // Страница одного курса
     @GetMapping("/{id}")
-    public String getCourseById(
-            @PathVariable Long id,
-            Model model) {
+    public CourseResponse getCourseById(@PathVariable Long id) {
+        return CourseResponse.from(courseService.getCourseById(id));
+    }
 
-        Course course = courseService.getCourseById(id);
+    @PostMapping
+    public CourseResponse createCourse(
+            @RequestBody CreateCourseRequest request) {
 
-        model.addAttribute("course", course);
+        Course course = new Course();
+        course.setTitle(request.title());
+        course.setDescription(request.description());
 
-        return "course-details";
+        Course saved = courseService.createCourse(
+                request.authorId(), course);
+
+        return CourseResponse.from(saved);
+    }
+
+    public record CreateCourseRequest(
+            String title,
+            String description,
+            Long authorId
+    ) {}
+
+    public record CourseResponse(
+            Long id,
+            String title,
+            String description
+    ) {
+        public static CourseResponse from(Course course) {
+            return new CourseResponse(
+                    course.getId(),
+                    course.getTitle(),
+                    course.getDescription()
+            );
+        }
     }
 }
