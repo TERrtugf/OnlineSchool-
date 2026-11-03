@@ -1,0 +1,8 @@
+POST http://localhost:8080/api/courses
+Content-Type: application/json
+
+{
+  "title": "Основы SQL",
+  "description": "Изучение баз данных и языка SQL",
+  "authorId": 1
+}

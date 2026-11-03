@@ -21,4 +21,9 @@ public interface ProgressRepository
             Long userId,
             ProgressStatus status
     );
+
+    void deleteByLesson_Course_Id(Long courseId);
+
+    void deleteByUserIdAndLesson_Course_Id(Long userId, Long courseId);
 }
+
