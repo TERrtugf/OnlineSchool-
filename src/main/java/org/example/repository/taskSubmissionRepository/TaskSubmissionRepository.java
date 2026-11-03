@@ -31,4 +31,6 @@ public interface TaskSubmissionRepository extends JpaRepository<TaskSubmission, 
     );
 
     void deleteByTaskId(Long taskId);
+
+    void deleteByTask_Lesson_Course_Id(Long courseId);
 }

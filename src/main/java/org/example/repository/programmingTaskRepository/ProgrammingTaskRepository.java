@@ -9,4 +9,6 @@ public interface ProgrammingTaskRepository
         extends JpaRepository<ProgrammingTask, Long> {
 
     List<ProgrammingTask> findByLessonIdOrderByIdAsc(Long lessonId);
+
+    void deleteByLesson_Course_Id(Long courseId);
 }
